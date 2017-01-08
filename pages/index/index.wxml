@@ -13,4 +13,10 @@
     <button type="primary" size="mini" class="timer-button" hover-class="play-button-hover"> 60分钟 </button>
 </view>
   <text class="warning">试听请您将手机音量调至自己适合的程度</text>
+      <text class="timer-title">其他频段选择：</text>
+ <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      {{array[index]}}
+    </view>
+  </picker>
 </view>
