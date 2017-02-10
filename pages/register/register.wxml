@@ -1,13 +1,55 @@
-<!--protocol.wxml-->
+<!--register.wxml-->
 <view class="container">
-  <text>请您注册后使用，谢谢。</text>
-<view class="page-section">
-      <view class="weui-cells__title">手机号</view>
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-          <input class="weui-input"  maxlength="11" bindinput="setPhone"/>
+  <text style="margin-left:1em">请您注册后使用，谢谢。</text>
+  <view class="page-section">
+
+        <view class="weui-cells__title">手机号</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input"  maxlength="11" bindinput="setPhone"/>
+          </view>
         </view>
-      </view>
-      </view>
-      <button bindtap="reg">注册</button>
+
+        <view class="weui-cells__title">手机验证码</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input"  maxlength="6" bindinput="setPhoneCode"/>
+            <button bindtap="sendCode">获取验证码</button>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">密码</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input"  maxlength="15" password="true" bindinput="setPassword"/>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">再输一次密码</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input"  maxlength="15" password="true" bindinput="setPasswordAgain"/>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">姓名</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input class="weui-input"  maxlength="6" bindinput="setName"/>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">注册地</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <picker bindchange="bindHospitalChange" value="{{hospital_index}}" range="{{hospital}}">
+              <view class="picker">
+                当前选择：{{hospital[hospital_index]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+
+  </view>
+  <button bindtap="reg" style="margin-top: 1em">注册</button>
 </view>

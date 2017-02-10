@@ -1,0 +1,9 @@
+<!--choose.wxml-->
+<view class="container">
+  <text style="margin:1em">您是首次使用，请在医生帮助下选择适合您的耳鸣频段。</text>
+  <view class="page-section">
+    <block wx:for="{{rangeItems}}">
+      <button style="margin:1em" bindtap="bind{{index}}">{{item}}</button>
+    </block>
+  </view>
+</view>

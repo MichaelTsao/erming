@@ -1,13 +1,17 @@
 //register.js
 Page({
   data: {
-    phone:"1"
+    phone:"",
+    hospital:["1","2"],
+    hospital_index:0
   },
   onLoad: function () {
     
   },
   reg: function(){
-    console.log(this.data.phone)
+    wx.navigateTo({
+        url: '../chooseRange/choose'
+    })
   },
   setPhone: function(e){
     this.setData(
@@ -15,5 +19,10 @@ Page({
         phone: e.detail.value
       }
     )
-  }
+  },
+  bindHospitalChange: function(e) {
+    this.setData({
+      hospital_index: e.detail.value
+    })
+  },
 })
