@@ -1,0 +1,9 @@
+<!--protocol.wxml-->
+<view class="container">
+  <view class="page-section">
+      <view class="textarea-wrp">
+        <textarea disabled="true" style="height: 3em" value="   你只能接受的一个协议，请点同意" />
+      </view>
+    </view>
+  <button bindtap="yes">同意</button>
+</view>

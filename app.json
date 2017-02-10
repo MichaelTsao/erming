@@ -1,8 +1,10 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
-  ],
+    "pages/logs/logs",
+    "pages/protocol/protocol",
+    "pages/register/register"
+ ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#3CF",

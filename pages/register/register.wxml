@@ -1,0 +1,13 @@
+<!--protocol.wxml-->
+<view class="container">
+  <text>请您注册后使用，谢谢。</text>
+<view class="page-section">
+      <view class="weui-cells__title">手机号</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input"  maxlength="11" bindinput="setPhone"/>
+        </view>
+      </view>
+      </view>
+      <button bindtap="reg">注册</button>
+</view>

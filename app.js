@@ -24,7 +24,31 @@ App({
       })
     }
   },
+  checkToken:function(){
+    var that = this
+    if(this.globalData.token){
+      var uid = this.requestApi('user/login', {"token": this.globalData.token})
+      console.log(uid)
+    }
+  },
+  requestApi:function(url, param){
+    var data = null
+    wx.request({
+      url: this.globalData.host+url,
+      data: param,
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        console.log(res.data)
+        data = res.data
+      }
+    })
+    return data
+  },
   globalData:{
-    userInfo:null
+    userInfo:null,
+    token:null,
+    host:"http://er.cx/"
   }
 })
