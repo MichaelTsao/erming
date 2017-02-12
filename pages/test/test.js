@@ -10,6 +10,20 @@ Page({
   back: function() {
     wx.navigateBack()
   },
+  ok: function(){
+    wx.redirectTo({
+      url: '../index/index',
+      success: function(res){
+        // success
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
+  },
   onLoad: function () {
 
   }
