@@ -7,6 +7,7 @@ Page({
     password1: "",
     name: "",
     hospital: [],
+    hospital_id: [],
     hospital_index: 0
   },
 
@@ -20,16 +21,48 @@ Page({
             'content-type': 'application/json'
         },
         success: function(res) {
+          var ids = []
+          var names = []
+          for (var id in res.data){
+            ids.push(id)
+            names.push(res.data[id])
+          }
+          console.log(names)
           that.setData({
-            hospital: res.data
+            hospital: names,
+            hospital_id: ids
           })
         }
       })
   },
 
   reg: function(){
-    wx.navigateTo({
-        url: '../chooseRange/choose'
+    var that = this
+
+    wx.request({
+      url: app.globalData.host + 'user/register',
+      data: {
+        "phone": this.data.phone,
+        "code": this.data.phoneCode,
+        "password": this.data.password,
+        "name": this.data.name,
+        "hospital": ids[this.data.hospital_id]
+      },
+      header: {
+          'content-type': 'application/json'
+      },
+      success: function(res) {
+        wx.navigateTo({
+            url: '../chooseRange/choose'
+        })
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '注册失败',
+          icon: 'loading',
+          duration: 1000
+        })
+      }
     })
   },
 
