@@ -6,6 +6,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
   },
+
   getUserInfo:function(cb){
     var that = this
     if(this.globalData.userInfo){
@@ -24,6 +25,7 @@ App({
       })
     }
   },
+
   checkToken:function(){
     var that = this
     if(this.globalData.token){
@@ -31,8 +33,8 @@ App({
       console.log(uid)
     }
   },
-  requestApi:function(url, param){
-    var data = null
+
+  requestApi:function(url, param, data){
     wx.request({
       url: this.globalData.host+url,
       data: param,
@@ -40,15 +42,17 @@ App({
           'content-type': 'application/json'
       },
       success: function(res) {
-        console.log(res.data)
-        data = res.data
+        console.log("api result: "+res.data)
+        if(data != null){
+          data = res.data
+        }
       }
     })
-    return data
   },
   globalData:{
     userInfo:null,
     token:null,
-    host:"http://er.cx/"
+    host:"http://er.cx/",
+    hospitals:[]
   }
 })
