@@ -3,48 +3,71 @@
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {}
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+  
   onLoad: function () {
-    console.log('onLoad')
     var that = this
     var app = getApp()
-    if (!app.checkToken()){
-      var token = ""
-      wx.login({
-            success: function(res) {
-              if (res.code) {
-                //发起网络请求
-                token = app.requestApi('user/login-wx',
-                  {
-                    code: res.code
-                  }
-                )
-              } else {
-                console.log('获取用户登录态失败！' + res.errMsg)
-              }
-            }
-          })
-      if (token == ""){
-        wx.redirectTo({
-          url: '../protocol/protocol'
-        })
-      }
-    }
 
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
-      })
+    wx.showToast({
+      title: '登录中',
+      icon: 'loading',
+      duration: 30000
     })
+
+    app.checkToken(this.tokenOk, this.tokenFail)
+  },
+
+  init: function(uid) {
+    // init view
+    wx.hideToast()
+  },
+
+  tokenOk: function(res) {
+    if (res.data != "0"){
+      this.init(res.data)
+    }else{
+      var that = this
+
+      wx.login({
+        success: function(res) {
+          if (res.code) {
+            //发起网络请求
+            app.requestApi('user/login-wx',
+              {
+                code: res.code
+              },
+              'get',
+              that.loginOk,
+              that.loginFail
+            )
+          } else {
+            that.loginFail()
+          }
+        }
+      })
+    }
+  },
+
+  tokenFail: function(res) {
+
+  },
+
+  loginOk: function(res) {
+    if(res.statusCode == 200){
+      wx.setStorage({
+        key: "token",
+        data: res.data[1]
+      })
+      
+      this.init(res.data[0])
+    }else{
+      wx.redirectTo({
+        url: '../protocol/protocol'
+      })
+    }
+  },
+
+  loginFail: function(res) {
   }
 })

@@ -26,32 +26,47 @@ App({
     }
   },
 
-  checkToken:function(){
-    var that = this
-    if(this.globalData.token){
-      var uid = this.requestApi('user/login', {"token": this.globalData.token})
-      console.log(uid)
+  checkToken:function(success, fail){
+    var token = wx.getStorageSync('token')
+
+    if(token){
+      this.requestApi('user/login', {"token": token}, 'get', success, fail)
+    }else{
+      fail()
     }
   },
 
-  requestApi:function(url, param, data){
+  requestApi:function(url, param=null, method='get', successFunc=null, failFunc=null){
     wx.request({
       url: this.globalData.host+url,
       data: param,
+      method: method,
       header: {
-          'content-type': 'application/json'
+          'content-type': 'application/x-www-form-urlencoded'
       },
       success: function(res) {
-        console.log("api result: "+res.data)
-        if(data != null){
-          data = res.data
+        console.log("api result")
+        console.log(res)
+        if (typeof successFunc == "function"){
+          successFunc(res)
+        }
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '网络异常',
+          icon: 'loading',
+          duration: 1000
+        })
+
+        if(typeof failFunc == "function"){
+          failFunc(res)
         }
       }
     })
   },
+
   globalData:{
-    userInfo:null,
-    token:null,
+    uid: null,
     host:"http://er.cx/",
     hospitals:[]
   }
