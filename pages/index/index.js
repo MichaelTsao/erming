@@ -27,33 +27,34 @@ Page({
     if (res.data != "0"){
       this.init(res.data)
     }else{
-      var that = this
-
-      wx.login({
-        success: function(res) {
-          if (res.code) {
-            //发起网络请求
-            app.requestApi('user/login-wx',
-              {
-                code: res.code
-              },
-              'get',
-              that.loginOk,
-              that.loginFail
-            )
-          } else {
-            that.loginFail()
-          }
-        }
-      })
+      this.tokenFail()
     }
   },
 
-  tokenFail: function(res) {
+  tokenFail: function() {
+    var that = this
 
+    wx.login({
+      success: function(res) {
+        if (res.code) {
+          //发起网络请求
+          app.requestApi('user/login-wx',
+            {
+              code: res.code
+            },
+            'get',
+            that.loginOk,
+            that.loginFail
+          )
+        } else {
+          that.loginFail()
+        }
+      }
+    })
   },
 
   loginOk: function(res) {
+    console.log(res.statusCode)
     if(res.statusCode == 200){
       wx.setStorage({
         key: "token",
