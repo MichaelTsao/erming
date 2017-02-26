@@ -42,11 +42,11 @@ var pageObject = {
 }
 
 for (var i = 0; i < items.length; ++i) {
-    (function (itemIndex) {
-        pageObject['bind' + itemIndex] = function (e) {
-            console.log('click' + ids[itemIndex], e)
+    (function (i) {
+        pageObject['bind' + strval(i)] = function (e) {
+            console.log('click' + ids[i], e)
             wx.navigateTo({
-                url: '../test/test?id=' + ids[itemIndex]
+                url: '../test/test?id=' + ids[i]
             })
         }
     })(i)
