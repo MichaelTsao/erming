@@ -65,9 +65,15 @@ App({
         })
     },
 
+    showRange: function (rangeData) {
+        return rangeData.min + 'Hz------' + rangeData.max + 'Hz'
+    },
+
     globalData: {
         uid: null,
         host: "http://er.cx/",
-        hospitals: []
+        hospitals: [],
+        rangeItems: [],
+        rangeSelect: null
     }
 })

@@ -1,17 +1,7 @@
 //choose.js
-var items = []
-var ids = []
 var pageObject = {
     data: {
         rangeItems: [],
-        rangeId: [],
-        rangeSelect: null
-    },
-
-    selectRange: function (e) {
-        this.setData({
-            rangeItems: e
-        })
     },
 
     onLoad: function () {
@@ -27,29 +17,29 @@ var pageObject = {
     },
 
     getOk: function (res) {
-        var ids = []
-        var names = []
-        for (var id in res.data) {
-            ids.push(id)
-            names.push(res.data[id])
-        }
-        items = names
-        this.setData({
-            rangeItems: names,
-            rangeId: ids
-        })
-    }
-}
+        var that = this
+        var app = getApp()
+        var items = []
 
-for (var i = 0; i < items.length; ++i) {
-    (function (i) {
-        pageObject['bind' + strval(i)] = function (e) {
-            console.log('click' + ids[i], e)
-            wx.navigateTo({
-                url: '../test/test?id=' + ids[i]
-            })
+        for (var id in res.data) {
+            items.push(getApp().showRange(res.data[id]))
         }
-    })(i)
+
+        this.setData({
+            rangeItems: items,
+        })
+        app.globalData.rangeItems = res.data
+
+        for (var i = 0; i < res.data.length; ++i) {
+            (function (i) {
+                that['bind' + i] = function (e) {
+                    wx.navigateTo({
+                        url: '../test/test?id=' + i
+                    })
+                }
+            })(i)
+        }
+    }
 }
 
 Page(pageObject)
