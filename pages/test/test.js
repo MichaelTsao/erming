@@ -3,7 +3,7 @@
 var app = getApp()
 Page({
     data: {
-        range: ""
+        range: "",
     },
 
     //事件处理函数
@@ -30,7 +30,18 @@ Page({
         var app = getApp()
 
         this.setData({
-            range: getApp().showRange(app.globalData.rangeItems[option.id])
+            range: getApp().showRange(app.globalData.rangeItems[option.id]),
+        })
+        app.globalData.rangeSelect = option.id
+    },
+
+    play: function () {
+        var app = getApp()
+
+        wx.playBackgroundAudio({
+            dataUrl: app.globalData.rangeItems[app.globalData.rangeSelect].file,
+            title: '耳鸣治疗',
+            coverImgUrl: ''
         })
     }
 })

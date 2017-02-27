@@ -1,11 +1,10 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/chooseRange/choose",
     "pages/register/register",
-    "pages/index/index",
     "pages/logs/logs",
     "pages/protocol/protocol",
-    "pages/chooseRange/choose",
     "pages/test/test"
  ],
   "window":{

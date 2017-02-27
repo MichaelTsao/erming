@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-  <text class="range-title">您的选择是是：</text>
+  <text class="range-title">您的选择是：</text>
   <view class="range-section">
     <text class="range-name">{{range}}</text>
-    <button type="default" class="play-button" hover-class="play-button-hover"> 试听声音 </button>
+    <button type="default" class="play-button" hover-class="play-button-hover" bindtap="play"> 试听声音 </button>
   </view>
     <text class="timer-title">试听请您将手机音量调至自己适合的程度</text>
     <view class="timer-section">

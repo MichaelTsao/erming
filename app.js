@@ -1,10 +1,51 @@
 //app.js
 App({
     onLaunch: function () {
-        //调用API从本地缓存中获取数据
-        var logs = wx.getStorageSync('logs') || []
-        logs.unshift(Date.now())
-        wx.setStorageSync('logs', logs)
+        this.checkToken(this.tokenOk, this.tokenFail)
+    },
+
+    tokenOk: function (res) {
+        if (res.data == "0") {
+            this.tokenFail()
+        }
+    },
+
+    tokenFail: function () {
+        var that = this
+
+        wx.login({
+            success: function (res) {
+                if (res.code) {
+                    //发起网络请求
+                    app.requestApi('user/login-wx',
+                        {
+                            code: res.code
+                        },
+                        'get',
+                        that.loginOk,
+                        that.loginFail
+                    )
+                } else {
+                    that.loginFail()
+                }
+            }
+        })
+    },
+
+    loginOk: function (res) {
+        if (res.statusCode == 200) {
+            wx.setStorage({
+                key: "token",
+                data: res.data[1]
+            })
+        } else {
+            wx.redirectTo({
+                url: '../protocol/protocol'
+            })
+        }
+    },
+
+    loginFail: function (res) {
     },
 
     getUserInfo: function (cb) {
@@ -71,7 +112,8 @@ App({
 
     globalData: {
         uid: null,
-        host: "http://er.cx/",
+        host: "http://er.test.dakashuo.com/",
+        // host: "http://er.cx/",
         hospitals: [],
         rangeItems: [],
         rangeSelect: null
