@@ -8,14 +8,27 @@ var pageObject = {
         var app = getApp();
         var that = this
 
+        app.requestApi('range/list',
+            {},
+            'GET',
+            that.getOk,
+            null
+        )
+    },
+
+    getOk: function (res) {
+        var app = getApp()
         var items = []
+        var that = this
+
+        app.globalData.rangeItems = res.data
 
         for (var id in app.globalData.rangeItems) {
             items.push(app.showRange(app.globalData.rangeItems[id]))
         }
 
         this.setData({
-            rangeItems: items,
+            'rangeItems': items,
         })
 
         for (var i = 0; i < app.globalData.rangeItems.length; ++i) {

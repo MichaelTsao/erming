@@ -1,6 +1,7 @@
 //test.js
 //获取应用实例
 var app = getApp()
+
 Page({
     data: {
         range: "",
@@ -12,6 +13,15 @@ Page({
     },
 
     ok: function () {
+        var token = wx.getStorageSync('token')
+        app.requestApi('user/set-range', {
+            'token': token,
+            'rangeId': app.globalData.rangeItems[app.globalData.rangeSelect].id
+        }, "GET", this.setOk(), null)
+    },
+
+    setOk: function () {
+        app.globalData.init = 1
         wx.redirectTo({
             url: '../index/index',
             success: function (res) {

@@ -12,7 +12,7 @@ App({
 
         this.requestApi('range/list',
             {},
-            'get',
+            'GET',
             that.getOk,
             null
         )
@@ -42,7 +42,7 @@ App({
                         {
                             code: res.code
                         },
-                        'get',
+                        'GET',
                         that.loginOk,
                         that.loginFail
                     )
@@ -93,7 +93,7 @@ App({
         var token = wx.getStorageSync('token')
 
         if (token) {
-            this.requestApi('user/login', {"token": token}, 'get', success, fail)
+            this.requestApi('user/login', {"token": token}, 'GET', success, fail)
         } else {
             fail()
         }

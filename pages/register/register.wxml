@@ -13,7 +13,7 @@
         <view class="weui-cells__title">手机验证码</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input class="weui-input"  maxlength="6" bindinput="setPhoneCode"/>
+            <input class="weui-input"  maxlength="6" bindinput="setPhoneCode" style="width: 200px"/>
             <button bindtap="sendCode">获取验证码</button>
           </view>
         </view>

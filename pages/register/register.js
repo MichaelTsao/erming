@@ -101,7 +101,7 @@ Page({
                             "hospital": that.data.hospital_id[that.data.hospital_index],
                             'weixin_code': res.code
                         },
-                        'post',
+                        'POST',
                         that.registerOk,
                         that.registerFail
                     )
