@@ -2,7 +2,7 @@
 <view class="container">
   <text class="range-title">医生为您选择的频段是：</text>
   <view class="range-section">
-    <text class="range-name">100HZ-----------250HZ</text>
+    <text class="range-name">{{range}}</text>
     <button type="default" class="play-button" hover-class="play-button-hover" bindtap="play"> 播放声音 </button>
   </view>
     <text class="timer-title">定时：</text>

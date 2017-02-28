@@ -4,9 +4,31 @@ App({
         this.checkToken(this.tokenOk, this.tokenFail)
     },
 
+    init: function (id, range) {
+        var that = this
+
+        this.globalData.uid = id
+        this.globalData.rangeSelect = range
+
+        this.requestApi('range/list',
+            {},
+            'get',
+            that.getOk,
+            null
+        )
+
+        this.globalData.init = 1
+    },
+
+    getOk: function (res) {
+        this.globalData.rangeItems = res.data
+    },
+
     tokenOk: function (res) {
         if (res.data == "0") {
             this.tokenFail()
+        } else {
+            this.init(res.data.id, res.data.range)
         }
     },
 
@@ -38,6 +60,7 @@ App({
                 key: "token",
                 data: res.data[1]
             })
+            this.init(res.data[0].id, res.data[0].range)
         } else {
             wx.redirectTo({
                 url: '../protocol/protocol'
@@ -116,6 +139,7 @@ App({
         // host: "http://er.cx/",
         hospitals: [],
         rangeItems: [],
-        rangeSelect: null
+        rangeSelect: null,
+        init: 0
     }
 })

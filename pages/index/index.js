@@ -2,19 +2,18 @@
 //获取应用实例
 var app = getApp()
 Page({
-    data: {},
+    data: {
+        range: ""
+    },
 
     onLoad: function () {
-        var that = this
-        var app = getApp()
-
         wx.showToast({
             title: '加载中',
             icon: 'loading',
             duration: 30000
         })
 
-        this.init()
+        setTimeout(this.checkInit, 100)
     },
 
     play: function () {
@@ -27,10 +26,23 @@ Page({
         })
     },
 
-    init: function () {
+    checkInit: function () {
+        var app = getApp()
 
-        wx.hideToast()
-    },
+        if (app.globalData.init == 0) {
+            setTimeout(this.checkInit, 100);
+        }else{
+            if (app.globalData.rangeSelect == null) {
+                wx.redirectTo({
+                    url: '../chooseRange/choose'
+                })
+            }
 
+            this.setData({
+                'range': app.showRange(app.globalData.rangeItems[app.globalData.rangeSelect])
+            })
 
+            wx.hideToast()
+        }
+    }
 })

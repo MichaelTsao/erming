@@ -8,29 +8,17 @@ var pageObject = {
         var app = getApp();
         var that = this
 
-        app.requestApi('range/list',
-            {},
-            'get',
-            that.getOk,
-            null
-        )
-    },
-
-    getOk: function (res) {
-        var that = this
-        var app = getApp()
         var items = []
 
-        for (var id in res.data) {
-            items.push(getApp().showRange(res.data[id]))
+        for (var id in app.globalData.rangeItems) {
+            items.push(app.showRange(app.globalData.rangeItems[id]))
         }
 
         this.setData({
             rangeItems: items,
         })
-        app.globalData.rangeItems = res.data
 
-        for (var i = 0; i < res.data.length; ++i) {
+        for (var i = 0; i < app.globalData.rangeItems.length; ++i) {
             (function (i) {
                 that['bind' + i] = function (e) {
                     wx.navigateTo({
