@@ -35,7 +35,7 @@
         <view class="weui-cells__title">姓名</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input class="weui-input"  maxlength="6" bindinput="setName"/>
+            <input class="weui-input"  maxlength="20" bindinput="setName"/>
           </view>
         </view>
 
