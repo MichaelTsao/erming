@@ -16,12 +16,11 @@ App({
             that.getOk,
             null
         )
-
-        this.globalData.init = 1
     },
 
     getOk: function (res) {
         this.globalData.rangeItems = res.data
+        this.globalData.init = 1
     },
 
     tokenOk: function (res) {
@@ -39,7 +38,7 @@ App({
             success: function (res) {
                 if (res.code) {
                     //发起网络请求
-                    app.requestApi('user/login-wx',
+                    that.requestApi('user/login-wx',
                         {
                             code: res.code
                         },
