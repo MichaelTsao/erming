@@ -134,7 +134,7 @@ App({
 
     globalData: {
         uid: null,
-        host: "http://er.test.dakashuo.com/",
+        host: "https://er.caoxw.com/",
         // host: "http://er.cx/",
         hospitals: [],
         rangeItems: [],

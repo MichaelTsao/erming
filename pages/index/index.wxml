@@ -3,20 +3,21 @@
   <text class="range-title">医生为您选择的频段是：</text>
   <view class="range-section">
     <text class="range-name">{{range}}</text>
-    <button type="default" class="play-button" hover-class="play-button-hover" bindtap="play"> 播放声音 </button>
+    <audio poster="" name="耳鸣治疗" author="治疗" src="{{url}}" id="myAudio" loop controls
+    bindplay="play" bindpause="pause" bindended="end" binderror="error"></audio>
   </view>
-    <text class="timer-title">定时：</text>
+    <text class="timer-title">定时：{{minutes}}分钟</text>
     <view class="timer-section">
-    <button type="primary" size="mini" class="timer-button" hover-class="play-button-hover"> 15分钟 </button>
-    <button type="primary" size="mini" class="timer-button" hover-class="play-button-hover"> 30分钟 </button>
-    <button type="primary" size="mini" class="timer-button" hover-class="play-button-hover"> 45分钟 </button>
-    <button type="primary" size="mini" class="timer-button" hover-class="play-button-hover"> 60分钟 </button>
+    <button type="primary" size="mini" class="timer-button" bindtap="bind15"> 15分钟 </button>
+    <button type="primary" size="mini" class="timer-button" bindtap="bind30"> 30分钟 </button>
+    <button type="primary" size="mini" class="timer-button" bindtap="bind45"> 45分钟 </button>
+    <button type="primary" size="mini" class="timer-button" bindtap="bind60"> 60分钟 </button>
 </view>
   <text class="warning">试听请您将手机音量调至自己适合的程度</text>
-      <text class="timer-title">其他频段选择：</text>
- <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <text class="timer-title" style="margin-bottom: 20px">其他频段选择：</text>
+ <picker bindchange="rangeChange" value="{{rangeSelect}}" range="{{rangeList}}" style="margin-left: 100px">
     <view class="picker">
-      {{array[index]}}
+      {{rangeList[rangeSelect]}}
     </view>
   </picker>
 </view>
